@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
-        Get_Url("http://nanrenfuli.com/16500.html");
+        Get_Url("http://nanrenfuli.com");
     }
 
     public static void Get_Url(String url) {
