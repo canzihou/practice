@@ -2,6 +2,8 @@ package K个最近的点;
 
 import model.Point;
 
+import java.util.Arrays;
+
 public class Solution {
     /*
      * @param points: a list of points
