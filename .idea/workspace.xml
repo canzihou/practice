@@ -97,7 +97,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/玩具工厂/ToyFactory.java" />
         <option value="$PROJECT_DIR$/src/玩具工厂/Dog.java" />
         <option value="$PROJECT_DIR$/src/玩具工厂/Cat.java" />
         <option value="$PROJECT_DIR$/src/左填充/StringUtils.java" />
@@ -148,6 +147,7 @@
         <option value="$PROJECT_DIR$/src/插入区间/Solution.java" />
         <option value="$PROJECT_DIR$/src/spider/Main.java" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/.idea/workspace.xml" />
       </list>
     </option>
   </component>
