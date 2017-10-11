@@ -12,33 +12,36 @@ public class Solution {
      * @return: A new interval list.
      */
     public List<Interval> insert(List<Interval> intervals, Interval newInterval) {
-        int end = intervals.size() > 0 ? intervals.get(intervals.size() - 1).end : 0;
-        int[] hash = new int[Math.max(end, newInterval.end) + 1];
-        for (Interval interval : intervals) {
-            for (int j = interval.start; j < interval.end; j++) {
-                hash[j] = 1;
-            }
+        if (intervals.size() == 0) {
+            intervals.add(newInterval);
+            return intervals;
         }
-        for (int i = newInterval.start; i < newInterval.end; i++) {
-            hash[i] = 1;
-        }
-        intervals.clear();
-        int head = 0;
-        int tail = head + 1;
-        while (head < hash.length && tail < hash.length) {
-            while (hash[head] == 0) {
-                head++;
-            }
-            if (head < hash.length) {
-                tail = head + 1;
-                while (tail < hash.length && hash[tail] == 1) {
-                    tail++;
+        int index = 0;
+        while (index < intervals.size()) {
+            Interval interval1 = intervals.get(index);
+            if (isNotCrossed(interval1, newInterval)) {
+                if (newInterval.end < interval1.start) {
+                    intervals.add(index, newInterval);
+                    return intervals;
+                } else {
+                    index++;
+                    if (index >= intervals.size()) {
+                        intervals.add(newInterval);
+                        return intervals;
+                    }
                 }
-                intervals.add(new Interval(head, tail));
-                head = tail + 1;
+            } else {
+                newInterval = new Interval(Math.min(interval1.start, newInterval.start), Math.max(interval1.end, newInterval.end));
+                intervals.remove(index);
             }
         }
+        intervals.add(newInterval);
+
         return intervals;
+    }
+
+    private boolean isNotCrossed(Interval a, Interval b) {
+        return a.end < b.start || a.start > b.end;
     }
 
     public static void main(String[] args) {
