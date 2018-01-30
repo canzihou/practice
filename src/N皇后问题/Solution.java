@@ -1,53 +1,68 @@
 package N皇后问题;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 
 public class Solution {
 
-    private HashSet<Integer> locations = new HashSet<>();
+    private String genStr(int n, int position) {
+        char[] temp = new char[n];
+        for (int i = 0; i < temp.length; i++) {
+            temp[i] = '.';
+        }
+        temp[position - 1] = 'Q';
+        return new String(temp);
+    }
 
-//    public List<List<String>> solveNQueens(int n) {
-//        List<List<String>> result = new ArrayList<>();
-//        if (n == 1) {
-//            List<String> temp = new ArrayList<>();
-//            temp.add("Q");
-//            result.add(temp);
-//            return result;
-//        } else if (n < 4) {
-//            result.add(new ArrayList<>());
-//            return result;
-//        }
-//
-//        int row = 0;
-//        int col = 0;
-//        int[] pCheckerboard = new int[n];
-//        for (int i = 0; i < n; i++) {
-//            pCheckerboard[i] = -1;
-//        }
-//        while (row < n) {
-//            while (col < n) {
-//
-//            }
-//        }
-//
-//        char[][] matrix = new char[n][n];
-//
-//        for (char[] line : matrix) Arrays.fill(line, '.');
-//
-//
-////        return ans;
-//    }
+    private boolean check(int k, int[] nums) {
+        for (int i = 1; i < k; i++) {
+            if ((nums[i] == nums[k]) || Math.abs(nums[i] - nums[k]) == Math.abs(k - i)) {
+                return false;
+            }
+        }
+        return true;
+    }
 
-//    private int canPlace(int row, int col, int n, int[] pCheckerboard) {
-//        for (int i = 0; i < n && i != row; i++) {
-//            if(pCheckerboard[i] == col){
-//                return 0;
-//            }
-//            if(abs)
-//        }
-//    }
+    public List<List<String>> solveNQueens(int n) {
+        int[] temp = new int[n + 1];
+        List<List<String>> result = new ArrayList<>();
+        List<String> tempList = new ArrayList<>();
+        int k = 1;
+        temp[k] = 1;
+        while (k > 0) {
+            if (k <= n && temp[k] <= n) {
+                if (!check(k, temp)) {
+                    temp[k]++;
+                } else {
+                    k++;
+                    if (k <= n) {
+                        temp[k] = 1;
+                    }
+                }
+            } else {
+                if (k > n) {
+                    for (int i = 1; i < temp.length; i++) {
+                        tempList.add(genStr(n, temp[i]));
+                    }
+                    result.add(new ArrayList<>(tempList));
+                    tempList.clear();
+                }
+                k--;
+                temp[k]++;
+            }
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        List<List<String>> lists = solution.solveNQueens(4);
+        for (List<String> list : lists) {
+            for (String s : list) {
+                System.out.println(s);
+            }
+            System.out.println("///");
+        }
+    }
 }
 
